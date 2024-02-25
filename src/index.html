@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de ropa</title>
+    <script src="js/login.js" defer></script>
+</head>
+<body>
+    <section id = "login-register">
+        <h1>Bienvenido a la tienda de ropa</h1>
+    
+        <article id="login">
+            <h3>Login</h3>
+            <form id="login-form "action="#" method="post">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input id="login-submit" type="submit" value="Login">
+            </form>
+            <button id="register-button">Click here to go to sign up!</button>
+        </article>
+
+        <article id="register" style="display: none;">
+            <h3>Register</h3>
+            <form action="#" method="post" id="register-form">
+                <label for="username">Username</label>
+                <input type="text" name="username" placeholder="Username" required >
+                <label for="name">Name</label>
+                <input type="text" name="name" placeholder="Name" required disabled>
+                <label for="lastname">Lastname</label>
+                <input type="text" name="lastname" placeholder="Lastname" required disabled>
+                <label for="dni">DNI</label>
+                <input type="text" name="dni" placeholder="DNI" required disabled pattern="[0-9]{8}[A-Z]">
+                <label for="age">Age</label>
+                <input type="number" name="age" placeholder="Age" required disabled min="18">
+                <label for="password">Password</label>
+                <input type="password" name="password" placeholder="Password" required disabled>
+                <input id="register-submit" type="submit" name="submit" value="Register" disabled>
+            </form>
+            <button id="login-button">Click here to login!</button>
+        </article>
+    </section>
+</body>
+</html>
