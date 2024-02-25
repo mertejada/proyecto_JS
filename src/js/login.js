@@ -1,6 +1,6 @@
-//URL FAKESTORE API
 const usersURL = 'https://fakestoreapi.com/users';
 const productsURL = 'https://fakestoreapi.com/products';
+const productosRuta = '../html/productos.html';
 
 
 let loginRegister = document.getElementById('login-register');
@@ -105,7 +105,9 @@ function login(username, password) {
     if (user) {
         if (user.password === password) {
             alert('Login successful');
-            window.location.assign('../../src/html/products.html');
+            window.location.replace(productosRuta);
+            //que imprima errores en el html
+            
         } else {
             alert('The password is incorrect. Please try again.');
         }
@@ -119,7 +121,7 @@ function login(username, password) {
                         // Almacena el usuario localmente antes de redirigir
                         localStorage.setItem(username, JSON.stringify(user));
                         alert('Login successful');
-                        window.location.assign('../../src/html/products.html');
+                        window.location.replace(productosRuta);
                     } else {
                         alert('The password is incorrect. Please try again.');
                     }
@@ -129,4 +131,5 @@ function login(username, password) {
             });
     }
 }
+
 

@@ -1,0 +1,153 @@
+const productsURL = 'https://fakestoreapi.com/products';
+const productsSortDescURL = 'https://fakestoreapi.com/products?sort=desc'; 
+const productsSortAscURL = 'https://fakestoreapi.com/products?sort=asc';
+
+let currentView = 'list';
+let sortBy = 'asc';
+
+let currentPage = 1;
+const productsPerPage = 20; // Cantidad de productos por página
+
+const categorySelect = document.getElementById('category');
+
+categorySelect.addEventListener('change', function() {
+    sortBy = this.value;
+    currentPage = 1;
+    displayView(currentView);
+
+});
+
+function getProducts(page,sortBy) {
+    let url = productsURL;
+
+    if (sortBy === 'asc') {
+        url = productsSortAscURL;
+    } else if (sortBy === 'desc') {
+        url = productsSortDescURL;
+    }
+
+    return fetch(`${url}&limit=${productsPerPage}&page=${page}`)
+        .then(response => response.json())
+        .then(products => products);
+}
+
+function createListView(products) {
+    const productList = document.getElementById('product-list');
+    const productTable = document.getElementById('product-table');
+
+    if (currentPage === 1) {
+        productList.innerHTML = ''; // Limpiar lista de productos solo en la primera carga
+    }
+
+    products.forEach(product => {
+        const productItem = document.createElement('li');
+        productItem.innerHTML = `
+            <h2>${product.title}</h2>
+            <img src="${product.image}" alt="${product.title}">
+            <p>${product.price}€</p>
+        `;
+        productItem.addEventListener('click', () => showProductDetails(product.id));
+        productList.appendChild(productItem);
+        
+    });
+
+    productList.style.display = 'block';
+    productTable.style.display = 'none';
+}
+
+function createTableView(products) {
+    const productList = document.getElementById('product-list');
+    const productTable = document.getElementById('product-table');
+
+    if (currentPage === 1) {
+        productTable.innerHTML = ''; // Limpiar tabla de productos solo en la primera carga
+    }
+
+    const table = document.createElement('table');
+    const thead = document.createElement('thead');
+    const tbody = document.createElement('tbody');
+    const headerRow = document.createElement('tr');
+    const headers = ['Title', 'Image', 'Price'];
+
+    headers.forEach(header => {
+        const th = document.createElement('th');
+        th.textContent = header;
+        headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    products.forEach(product => {
+        const productRow = document.createElement('tr');
+        productRow.value = product.id;
+        productRow.innerHTML = `
+            <td>${product.title}</td>
+            <td><img src="${product.image}" alt="${product.title}"></td>
+            <td>${product.price}€</td>
+        `;
+        productRow.addEventListener('click', () => showProductDetails(product.id));
+        tbody.appendChild(productRow);
+    });
+
+    table.appendChild(tbody);
+    productTable.innerHTML = '';
+    productTable.appendChild(table);
+
+    productList.style.display = 'none';
+    productTable.style.display = 'block';
+}
+
+function displayView(currentView, products) {
+    if (currentView === 'list') {
+        createListView(products);
+    } else if (currentView === 'table') {
+        createTableView(products);
+    }
+}
+
+
+document.getElementById('choose-view').addEventListener('click', (event) => {
+    if (event.target.id === 'list') {
+        currentView = 'list';
+        displayView(currentView);
+    } else if (event.target.id === 'table') {
+        currentView = 'table';
+        displayView(currentView);
+    }
+});
+
+window.addEventListener('scroll', () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        currentPage++;displayView(currentView);
+    }
+});
+
+
+function displayView(currentView) {
+    getProducts(currentPage, sortBy)
+    .then(products => 
+        {
+            if (currentView === 'list') {
+                createListView(products);
+            } else if (currentView === 'table') {
+                createTableView(products);
+            }
+
+
+        });
+}
+
+displayView(currentView);
+
+function showProductDetails(productId) {
+    fetch(`https://fakestoreapi.com/products/${productId}`)
+        .then(response => response.json())
+        .then(product => {
+            alert(`Detalles del producto:\n\nTítulo: ${product.title}\nPrecio: ${product.price}€\nDescripción: ${product.description}`);
+        })
+        .catch(error => {
+            console.error('Error al obtener detalles del producto', error);
+        });
+}
+
+

@@ -4,8 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda de ropa</title>
+    <script src="../js/products.js" defer></script>
+    <link rel="stylesheet" href="../styles/products.css">
 </head>
 <body>
-    <h1>Holi</h1>
+
+    <h1>Productos</h1>
+    <section id="products">
+        <div id="choose-view"> <p>Choose view:
+            <button id="list">List</button>
+            <button id="table">Table</button>
+        </p>
+        </div>
+
+        <div id="sortby-category">
+            <p>Sort by category:
+                <select id="category">
+                    <option value="asc">Ascendent</option>
+                    <option value="desc">Descendent</option>
+                </select>
+            </p>
+        </div>
+        
+
+        <ul id="product-list">
+        </ul>
+
+        <table id="product-table" style="display: none;">
+        </table>
+    </section>
 </body>
 </html>
