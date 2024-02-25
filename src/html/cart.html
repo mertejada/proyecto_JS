@@ -14,8 +14,8 @@
         <a href = "../index.html">Cerrar sesión</a>
         <a href = "products.html">Ver productos</a>
     </header>
-    <h1>Carrito</h1>
     <section id="cart">
+        <h1>Carrito</h1>
         <table id="cart-table">
             <thead>
                 <tr>
@@ -32,7 +32,13 @@
 
         </table>
         <p>Total: <span id="total-price">0€</span></p>
-        <button id="process">Process order</button>
+        <button id="process-button">Process order</button>
+    </section>
+
+    <section id="order-confirmation" style="display:none">
+        <h1>Order confirmation</h1>
+        <p>Your order has been processed successfully</p>
+        <a href="products.html">Go back to the store</a>
     </section>
     <a href = "products.html" style="display:none">Ir a la tienda</a>
    

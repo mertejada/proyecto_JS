@@ -5,6 +5,7 @@ let currentUser = localStorage.getItem('currentUsername');
 let cart = JSON.parse(localStorage.getItem(`cart-${currentUser}`)) || [];
 
 let total = 0;
+let totalPrice = document.getElementById('total-price');
 
 cart.forEach(product => {
     let row = document.createElement('tr');
@@ -56,10 +57,23 @@ cart.forEach(product => {
         totalPrice.innerHTML = `${total}€`;
     });
 
-    let totalPrice = document.getElementById('total-price');
     total += product.price * product.units;
 
     totalPrice.innerHTML = `${total}€`;
 });
 
 
+let processButton = document.getElementById('process-button');
+
+processButton.addEventListener('click', () => {
+    if (total > 0) {
+        alert('Your purchase has been processed successfully!');
+        localStorage.removeItem(`cart-${currentUser}`);
+        cartTable.innerHTML = '';
+        total = 0;
+        totalPrice.innerHTML = `${total}€`;
+
+    } else {
+        alert('You have no products on your cart.');
+    }
+});

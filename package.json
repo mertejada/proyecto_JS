@@ -23,6 +23,7 @@
   "homepage": "https://github.com/mertejada/proyecto_JS#readme",
   "dependencies": {
     "init": "^0.1.2",
+    "nodemailer": "^6.9.10",
     "npm": "^10.4.0"
   },
   "devDependencies": {

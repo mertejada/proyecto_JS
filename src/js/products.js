@@ -53,6 +53,15 @@ function createListView(products) {
         productItem.addEventListener('click', () => redirectToProductPage(product.id));
         productList.appendChild(productItem);
         
+        //debe haber una ANIMACION sencilla en la propia tarjeta del producto al pasar el cursor encima
+        productItem.addEventListener('mouseover', () => {
+            productItem.style.backgroundColor = 'lightgray';
+        });
+
+        //que cuando se va el cursor vuelva a su estado original
+        productItem.addEventListener('mouseout', () => {
+            productItem.style.backgroundColor = 'white';
+        });
     });
 
     productList.style.display = 'block';
@@ -89,6 +98,16 @@ function createTableView(products) {
         `;
         productRow.addEventListener('click', () => redirectToProductPage(product.id));
         tbody.appendChild(productRow);
+
+        //Debe producirse alguna animación sencilla en la propia tarjeta del producto al pasar el cursor encima 
+
+        productRow.addEventListener('mouseover', () => {
+            productRow.style.backgroundColor = 'lightgray';
+        });
+
+        productRow.addEventListener('mouseout', () => {
+            productRow.style.backgroundColor = 'white';
+        });
     });
 
     table.appendChild(tbody);

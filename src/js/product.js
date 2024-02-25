@@ -1,3 +1,4 @@
+
 let productId = new URLSearchParams(window.location.search).get('id');
 
 function getProductInfo(productId) {
@@ -9,11 +10,15 @@ function displayProductInfo(product) {
     const productInfo = document.getElementById('product-info');
     productInfo.innerHTML = `
         <h2>${product.title}</h2>
-        <img src="${product.image}" alt="${product.title}">
+        <img src="${product.image}" alt="${product.title} id="product-img">
         <p>${product.price}€</p>
         <p>${product.description}</p>
     `;
+
+
 }
+
+
 
 getProductInfo(productId)
     .then(product => {
@@ -60,8 +65,8 @@ getProductInfo(productId)
                         });
                     }
                     localStorage.setItem(`cart-${currentUser}`, JSON.stringify(userCart));
-    
                     alert('You added the product to the cart!');
+                    
                 })
                 .catch(error => {
                     console.error('Error fetching product information:', error);
@@ -71,5 +76,6 @@ getProductInfo(productId)
         }
     });
     
+
 
 

@@ -1,4 +1,5 @@
 //URL FAKESTORE API
+
 const usersURL = 'https://fakestoreapi.com/users';
 const productsURL = 'https://fakestoreapi.com/products';
 const productosRuta = "../html/products.html"; //como importarla de otro archivo?
@@ -25,12 +26,14 @@ loginRegister.addEventListener('click', (event) => {
             if(localStorage.getItem(username)) {
                 alert('Sorry! This username is already in use. Try a different username');
             } else {
+                let email = document.querySelector("#register [name='email']").value;
                 let name = document.querySelector("#register [name='name']").value;
                 let lastname = document.querySelector("#register [name='lastname']").value;
                 let dni = document.querySelector("#register [name='dni']").value;
                 let age = document.querySelector("#register [name='age']").value;
                 let password = document.querySelector("#register [name='password']").value;
                 let user = {
+                    email : email, 
                     name: name,
                     lastname: lastname,
                     dni: dni,
@@ -43,6 +46,8 @@ loginRegister.addEventListener('click', (event) => {
                 document.getElementById('register-form').reset();
                 document.getElementById('register').style.display = 'none';
                 document.getElementById('login').style.display = 'block';
+
+                sendRegisterMail(email, name);
 
                 alert('You have signed up successfully!');
             }
@@ -94,12 +99,16 @@ function validateNextField(inputName, nextInputName) {
 
 }
 
-document.querySelector("#register [name='username']").addEventListener('input', () => validateNextField('username', 'name'));
+document.querySelector("#register [name='username']").addEventListener('input', () => validateNextField('username', 'email'));
+document.querySelector("#register [name='email']").addEventListener('input', () => validateNextField('email', 'name'));
 document.querySelector("#register [name='name']").addEventListener('input', () => validateNextField('name', 'lastname'));
 document.querySelector("#register [name='lastname']").addEventListener('input', () => validateNextField('lastname', 'dni'));
 document.querySelector("#register [name='dni']").addEventListener('input', () => validateNextField('dni', 'age'));
 document.querySelector("#register [name='age']").addEventListener('input', () => validateNextField('age', 'password'));
 document.querySelector("#register [name='password']").addEventListener('input', () => validateNextField('password', 'submit'));
+
+
+
 
 
 function login(username, password) {
@@ -133,4 +142,33 @@ function login(username, password) {
     }
 }
 
+/*
+import { createTransport } from 'nodemailer';
 
+async function sendRegisterMail(userEmail, userName) {
+    let transporter = createTransport({
+        service: 'gmail',
+        auth: {
+            type: 'OAuth2',
+            user: process.env.MAIL_USERNAME,
+            pass: process.env.MAIL_PASSWORD,
+            clientId: process.env.OAUTH_CLIENTID,
+            clientSecret: process.env.OAUTH_CLIENT_SECRET,
+            refreshToken: process.env.OAUTH_REFRESH_TOKEN
+        }
+    });
+
+    let mailOptions = {
+        from: 'tu-correo@gmail.com',
+        to: userEmail,
+        subject: 'Bienvenido a nuestra web',
+        text: `Hola ${userName}, gracias por registrarte en nuestra web!`
+    };
+
+    try {
+        let info = await transporter.sendMail(mailOptions);
+        console.log('Email enviado: ' + info.response);
+    } catch (error) {
+        console.log(error);
+    }
+}*/
