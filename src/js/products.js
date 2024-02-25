@@ -2,6 +2,9 @@ const productsURL = 'https://fakestoreapi.com/products';
 const productsSortDescURL = 'https://fakestoreapi.com/products?sort=desc'; 
 const productsSortAscURL = 'https://fakestoreapi.com/products?sort=asc';
 
+const productList = document.getElementById('product-list');
+const productTable = document.getElementById('product-table');
+
 let currentView = 'list';
 let sortBy = 'asc';
 
@@ -32,8 +35,7 @@ function getProducts(page,sortBy) {
 }
 
 function createListView(products) {
-    const productList = document.getElementById('product-list');
-    const productTable = document.getElementById('product-table');
+    
 
     if (currentPage === 1) {
         productList.innerHTML = ''; // Limpiar lista de productos solo en la primera carga
@@ -46,7 +48,7 @@ function createListView(products) {
             <img src="${product.image}" alt="${product.title}">
             <p>${product.price}€</p>
         `;
-        productItem.addEventListener('click', () => showProductDetails(product.id));
+        productItem.addEventListener('click', () => redirectToProductPage(product.id));
         productList.appendChild(productItem);
         
     });
@@ -56,8 +58,6 @@ function createListView(products) {
 }
 
 function createTableView(products) {
-    const productList = document.getElementById('product-list');
-    const productTable = document.getElementById('product-table');
 
     if (currentPage === 1) {
         productTable.innerHTML = ''; // Limpiar tabla de productos solo en la primera carga
@@ -85,7 +85,7 @@ function createTableView(products) {
             <td><img src="${product.image}" alt="${product.title}"></td>
             <td>${product.price}€</td>
         `;
-        productRow.addEventListener('click', () => showProductDetails(product.id));
+        productRow.addEventListener('click', () => redirectToProductPage(product.id));
         tbody.appendChild(productRow);
     });
 
@@ -118,7 +118,8 @@ document.getElementById('choose-view').addEventListener('click', (event) => {
 
 window.addEventListener('scroll', () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        currentPage++;displayView(currentView);
+        currentPage++;
+        displayView(currentView);
     }
 });
 
@@ -139,15 +140,8 @@ function displayView(currentView) {
 
 displayView(currentView);
 
-function showProductDetails(productId) {
-    fetch(`https://fakestoreapi.com/products/${productId}`)
-        .then(response => response.json())
-        .then(product => {
-            alert(`Detalles del producto:\n\nTítulo: ${product.title}\nPrecio: ${product.price}€\nDescripción: ${product.description}`);
-        })
-        .catch(error => {
-            console.error('Error al obtener detalles del producto', error);
-        });
+function redirectToProductPage(productId) {
+    window.location.href = `product.html?id=${productId}`;
 }
 
 

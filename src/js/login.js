@@ -1,6 +1,8 @@
+//URL FAKESTORE API
 const usersURL = 'https://fakestoreapi.com/users';
 const productsURL = 'https://fakestoreapi.com/products';
-const productosRuta = '../html/productos.html';
+const productosRuta = "../html/products.html"; //como importarla de otro archivo?
+
 
 
 let loginRegister = document.getElementById('login-register');
@@ -105,9 +107,7 @@ function login(username, password) {
     if (user) {
         if (user.password === password) {
             alert('Login successful');
-            window.location.replace(productosRuta);
-            //que imprima errores en el html
-            
+            window.location.assign(productosRuta);
         } else {
             alert('The password is incorrect. Please try again.');
         }
