@@ -2,7 +2,7 @@
 const usersURL = 'https://fakestoreapi.com/users';
 const productsURL = 'https://fakestoreapi.com/products';
 const productosRuta = "../html/products.html"; //como importarla de otro archivo?
-
+let currentUsername = localStorage.getItem('currentUsername');
 
 
 let loginRegister = document.getElementById('login-register');
@@ -44,7 +44,7 @@ loginRegister.addEventListener('click', (event) => {
                 document.getElementById('register').style.display = 'none';
                 document.getElementById('login').style.display = 'block';
 
-                console.log('user', user);
+                alert('You have signed up successfully!');
             }
             break;
         case 'login-submit':
@@ -107,6 +107,7 @@ function login(username, password) {
     if (user) {
         if (user.password === password) {
             alert('Login successful');
+            localStorage.setItem('currentUsername', username);
             window.location.assign(productosRuta);
         } else {
             alert('The password is incorrect. Please try again.');

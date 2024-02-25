@@ -13,6 +13,8 @@ const productsPerPage = 20; // Cantidad de productos por página
 
 const categorySelect = document.getElementById('category');
 
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
 categorySelect.addEventListener('change', function() {
     sortBy = this.value;
     currentPage = 1;
@@ -143,5 +145,3 @@ displayView(currentView);
 function redirectToProductPage(productId) {
     window.location.href = `product.html?id=${productId}`;
 }
-
-
