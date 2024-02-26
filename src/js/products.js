@@ -118,13 +118,6 @@ function createTableView(products) {
     productTable.style.display = 'block';
 }
 
-function displayView(currentView, products) {
-    if (currentView === 'list') {
-        createListView(products);
-    } else if (currentView === 'table') {
-        createTableView(products);
-    }
-}
 
 
 document.getElementById('choose-view').addEventListener('click', (event) => {
