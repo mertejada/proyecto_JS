@@ -7,12 +7,15 @@ function getProductInfo(productId) {
 }
 
 function displayProductInfo(product) {
-    const productInfo = document.getElementById('product-info');
+    let productInfo = document.getElementById('product-info');
+
+    productInfo.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'text-center', 'p-4');
     productInfo.innerHTML = `
-        <h2>${product.title}</h2>
-        <img src="${product.image}" alt="${product.title} id="product-img">
-        <p>${product.price}€</p>
-        <p>${product.description}</p>
+        <h1 class="text-3xl font-bold p-10">${product.title}</h1> 
+        <img src="${product.image}" alt="${product.title} id="product-img" class="w-40 h-40">
+        <p class="text-2xl font-bold p-10">${product.price}€</p>
+        <p class="text-lg p-10">${product.description}</p>
+        
     `;
 
 
@@ -33,28 +36,23 @@ getProductInfo(productId)
     addToCartForm.addEventListener('submit', (event) => {
         event.preventDefault();
     
-        // Obtener el nombre de usuario actual del localStorage
         let currentUser = localStorage.getItem('currentUsername');
     
-        // Verificar si hay un usuario actualmente autenticado
         if (currentUser) {   
-            let units = parseInt(document.getElementById('quantity').value);
+            let units = parseInt(document.getElementById('units').value);
     
             if (units < 1) {
                 alert('You need to add at least 1 unit of the product to the cart.');
                 return;
             }
     
-            // Obtener el producto completo desde algún lugar, aquí asumimos que hay una función getProductInfo(productId)
             getProductInfo(productId)
                 .then(product => {
                     let userCart = JSON.parse(localStorage.getItem(`cart-${currentUser}`)) || [];
 
-                    // Verificar si el producto ya está en el carrito
                     let existingProduct = userCart.find(item => item.id === product.id);
 
                     if (existingProduct) {
-                        // Si el producto ya está en el carrito, incrementar la cantidad
                         existingProduct.units += units;
                     }else{
                         userCart.push({

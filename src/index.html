@@ -5,45 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda de ropa</title>
     <script src="js/login.js" defer></script>
+    <link rel="stylesheet" href="styles/salida.css">
 </head>
-<body>
-    <section id = "login-register">
-        <h1>Bienvenido a la tienda de ropa</h1>
-    
-        <article id="login">
-            <h3>Login</h3>
-            <form id="login-form "action="#" method="post">
-                <input type="text" name="username" placeholder="Username" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <input id="login-submit" type="submit" value="Login">
+<body class=" flex items-center justify-center">
+    <section id="login-register" class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg m-10">
+        <h1 class="text-3xl font-semibold mb-6 text-center">Bienvenido a la tienda de ropa</h1>
+
+        <article id="login" class="">
+            <h3 class="text-xl p-4">Inicia sesión</h3>
+            <form id="login-form" action="#" method="post">
+                <input type="text" name="username" placeholder="Username" required class="w-full  bg-gray-50 p-3 mb-3">
+                <input type="password" name="password" placeholder="Password" required class="w-full bg-gray-50 rounded-md p-3 mb-3">
+                <input id="login-submit" type="submit" value="Login" class=" w-full bg-blue-600 text-white rounded-md py-2">
             </form>
-            <button id="register-button">Click here to go to sign up!</button>
+            <button id="register-button" class=" w-full text-center text-blue-600 mt-2">Click here to go to sign up!</button>
         </article>
 
-        <article id="register" style="display: none;">
-            <h3>Register</h3>
+        <article id="register" class=" flex flex-wrap w-full"style="display: none; ">
+            <h3 class="text-xl p-4">Register</h3>
             <form action="#" method="post" id="register-form">
-                <label for="username">Username</label>
-                <input type="text" name="username" placeholder="Username" required >
-                <label for="email">Email</label>
-                <input type="email" name="email" placeholder="Email" required disabled>
-                <label for="name">Name</label>
-                <input type="text" name="name" placeholder="Name" required disabled>
-                <label for="lastname">Lastname</label>
-                <input type="text" name="lastname" placeholder="Lastname" required disabled>
-                <label for="dni">DNI</label>
-                <input type="text" name="dni" placeholder="DNI" required disabled pattern="[0-9]{8}[A-Z]">
-                <label for="age">Age</label>
-                <input type="number" name="age" placeholder="Age" required disabled min="18">
-                <label for="password">Password</label>
-                <input type="password" name="password" placeholder="Password" required disabled>
-                <input id="register-submit" type="submit" name="submit" value="Register" disabled>
+                <input type="text" name="username" placeholder="Username" required class="w-full  bg-gray-50 p-3 mb-3">
+                <input type="email" name="email" placeholder="Email" required disabled class="w-full  bg-gray-50 p-3 mb-3">
+                <input type="text" name="name" placeholder="Name" required disabled class="w-full  bg-gray-50 p-3 mb-3">
+                <input type="text" name="lastname" placeholder="Lastname" required disabled class="w-full  bg-gray-50 p-3 mb-3">
+                <input type="text" name="dni" placeholder="DNI" required disabled pattern="[0-9]{8}[A-Z]" class="w-full  bg-gray-50 p-3 mb-3">
+                <input type="number" name="age" placeholder="Age" required disabled min="18" class="w-full  bg-gray-50 p-3 mb-3">
+                <input type="password" name="password" placeholder="Password" required disabled class="w-full  bg-gray-50 p-3 mb-3">
+                <input id="register-submit" type="submit" name="submit" value="Register" disabled class="block w-full bg-blue-500 text-white rounded-md py-2">
             </form>
-            <button id="login-button">Click here to login!</button>
+            <button id="login-button" class="block w-full text-center text-blue-600 mt-2">Click here to login!</button>
         </article>
     </section>
 
-    <a href = "html/products.html" style="display:none">Ir a la tienda</a>
-
+    <a href="html/products.html" style="display:none">Ir a la tienda</a>
 </body>
 </html>

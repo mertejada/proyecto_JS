@@ -45,22 +45,26 @@ function createListView(products) {
 
     products.forEach(product => {
         const productItem = document.createElement('li');
+        productItem.classList.add('border', 'border-gray-200', 'p-4', 'flex', 'justify-between', 'items-center');
         productItem.innerHTML = `
             <h2>${product.title}</h2>
-            <img src="${product.image}" alt="${product.title}">
+            <img src="${product.image}" alt="${product.title}" class="w-20 h-20">
             <p>${product.price}€</p>
+            <a href="#" id="see-${product.id}" class="bg-blue-500 text-white p-2 m-5 rounded cursor-pointer">See more</a>
         `;
-        productItem.addEventListener('click', () => redirectToProductPage(product.id));
+        let seeProduct = productItem.querySelector(`#see-${product.id}`);
+        seeProduct.addEventListener('click', (event) => {
+            event.preventDefault();
+            redirectToProductPage(product.id);
+        });
         productList.appendChild(productItem);
         
-        //debe haber una ANIMACION sencilla en la propia tarjeta del producto al pasar el cursor encima
         productItem.addEventListener('mouseover', () => {
-            productItem.style.backgroundColor = 'lightgray';
+            productItem.classList.add('bg-gray-100');
         });
 
-        //que cuando se va el cursor vuelva a su estado original
         productItem.addEventListener('mouseout', () => {
-            productItem.style.backgroundColor = 'white';
+            productItem.classList.remove('bg-gray-100');
         });
     });
 
@@ -69,54 +73,43 @@ function createListView(products) {
 }
 
 function createTableView(products) {
-
-    if (currentPage === 1) {
-        productTable.innerHTML = ''; // Limpiar tabla de productos solo en la primera carga
-    }
-
-    const table = document.createElement('table');
-    const thead = document.createElement('thead');
-    const tbody = document.createElement('tbody');
-    const headerRow = document.createElement('tr');
-    const headers = ['Title', 'Image', 'Price'];
-
-    headers.forEach(header => {
-        const th = document.createElement('th');
-        th.textContent = header;
-        headerRow.appendChild(th);
-    });
-    thead.appendChild(headerRow);
-    table.appendChild(thead);
+    let tbody = document.querySelector('#product-table tbody');
+    tbody.innerHTML = '';
 
     products.forEach(product => {
-        const productRow = document.createElement('tr');
-        productRow.value = product.id;
-        productRow.innerHTML = `
-            <td>${product.title}</td>
-            <td><img src="${product.image}" alt="${product.title}"></td>
-            <td>${product.price}€</td>
-        `;
-        productRow.addEventListener('click', () => redirectToProductPage(product.id));
-        tbody.appendChild(productRow);
+        let productRow = document.createElement('tr');
 
-        //Debe producirse alguna animación sencilla en la propia tarjeta del producto al pasar el cursor encima 
+        productRow.classList.add('border', 'border-gray-200');
+        productRow.innerHTML = `
+            <td class="p-4">${product.title}</td>
+            <td><img src="${product.image}" alt="${product.title}" class="w-20 h-20"></td>
+            <td class="p-4 text-center">${product.price}€</td>
+            <td><a href="#" id="see-${product.id}" class="cursor-pointer bg-blue-500 text-white p-2 m-5 rounded">See more</a></td>
+        `;
+
+        let seeProduct = productRow.querySelector(`#see-${product.id}`);
+        seeProduct.addEventListener('click', (event) => {
+            event.preventDefault();
+            redirectToProductPage(product.id);
+        });
+
+    
 
         productRow.addEventListener('mouseover', () => {
-            productRow.style.backgroundColor = 'lightgray';
+            productRow.classList.add('bg-gray-100');
         });
 
         productRow.addEventListener('mouseout', () => {
-            productRow.style.backgroundColor = 'white';
+            productRow.classList.remove('bg-gray-100');
         });
+
+        tbody.appendChild(productRow);
     });
 
-    table.appendChild(tbody);
-    productTable.innerHTML = '';
-    productTable.appendChild(table);
-
-    productList.style.display = 'none';
-    productTable.style.display = 'block';
+    document.getElementById('product-table').style.display = 'block';
+    document.getElementById('product-list').style.display = 'none';
 }
+
 
 
 
@@ -138,18 +131,22 @@ window.addEventListener('scroll', () => {
 });
 
 
+
 function displayView(currentView) {
     getProducts(currentPage, sortBy)
-    .then(products => 
-        {
-            if (currentView === 'list') {
-                createListView(products);
-            } else if (currentView === 'table') {
-                createTableView(products);
-            }
-
-
-        });
+    .then(products => {
+        if (currentView === 'list') {
+            createListView(products);
+        } else if (currentView === 'table') {
+            createTableView(products);
+            document.getElementById('product-table').addEventListener('scroll', function() {
+                if (this.offsetHeight + this.scrollTop >= this.scrollHeight) {
+                    currentPage++;
+                    displayView(currentView);
+                }
+            });
+        }
+    });
 }
 
 displayView(currentView);
@@ -157,3 +154,5 @@ displayView(currentView);
 function redirectToProductPage(productId) {
     window.location.href = `product.html?id=${productId}`;
 }
+
+

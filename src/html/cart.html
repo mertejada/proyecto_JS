@@ -7,12 +7,23 @@
     <script src="../js/global.js" defer></script>
     <script src="../js/cart.js" defer></script>
 
+    <link rel="stylesheet" href="../styles/salida.css">
+
 
 </head>
 <body>
-    <header>
-        <a href = "../index.html">Cerrar sesión</a>
-        <a href = "products.html">Ver productos</a>
+    <header class=" p-4 flex justify-between shadow-md">
+        <div >
+            <a href="products.html" class="bg-blue-600 text-white p-2 rounded-md m-2">Productos</a>
+        </div>
+        <div >
+            <a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Carrito</a>
+            <a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favoritos</a>
+
+            <a href = "../index.html" class="text-gray-400 m-2" >Cerrar sesión</a>
+        </div>
+        
+
     </header>
     <section id="cart">
         <h1>Carrito</h1>
