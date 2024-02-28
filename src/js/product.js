@@ -1,10 +1,7 @@
 
 let productId = new URLSearchParams(window.location.search).get('id');
 
-function getProductInfo(productId) {
-    return fetch(`https://fakestoreapi.com/products/${productId}`)
-        .then(response => response.json());
-}
+
 
 function displayProductInfo(product) {
     let productInfo = document.getElementById('product-info');
@@ -38,12 +35,7 @@ function displayProductInfo(product) {
         like(product.id);
     });
 
-    
-
-
 }
-
-
 
 getProductInfo(productId)
     .then(product => {
@@ -53,83 +45,12 @@ getProductInfo(productId)
         console.error('Error fetching product information:', error);
     });
 
-    let addToCartForm = document.getElementById('add-to-cart');
-    let addToFavorites = document.getElementById('add-to-favorites');
-
-    addToCartForm.addEventListener('submit', (event) => {
-        event.preventDefault();
     
-        let currentUser = localStorage.getItem('currentUsername');
-    
-        if (currentUser) {   
-            let units = parseInt(document.getElementById('units').value);
-    
-            if (units < 1) {
-                alert('You need to add at least 1 unit of the product to the cart.');
-                return;
-            }
-    
-            getProductInfo(productId)
-                .then(product => {
-                    let userCart = JSON.parse(localStorage.getItem(`cart-${currentUser}`)) || [];
+let addToCartForm = document.getElementById('add-to-cart');
+let addToFavorites = document.getElementById('add-to-favorites');
 
-                    let existingProduct = userCart.find(item => item.id === product.id);
-
-                    if (existingProduct) {
-                        existingProduct.units += units;
-                    }else{
-                        userCart.push({
-                            id: product.id,
-                            title: product.title,
-                            price: product.price,
-                            units: units
-                        });
-                    }
-                    localStorage.setItem(`cart-${currentUser}`, JSON.stringify(userCart));
-                    alert('You added the product to the cart!');
-                    
-                })
-                .catch(error => {
-                    console.error('Error fetching product information:', error);
-                });
-        } else {
-            alert('You must be logged in to add products to the cart.');
-        }
-    });
-
-    addToFavorites.addEventListener('click', (event) => {
-        event.preventDefault();
-
-        let currentUser = localStorage.getItem('currentUsername');
-
-        if (currentUser) {
-            getProductInfo(productId)
-                .then(product => {
-                    let userFavorites = JSON.parse(localStorage.getItem(`favorites-${currentUser}`)) || [];
-
-                    let existingProduct = userFavorites.find(item => item.id === product.id);
-
-                    if (!existingProduct) {
-                        userFavorites.push({
-                            id: product.id,
-                            title: product.title,
-                            price: product.price,
-                            img: product.image
-                        });
-                        localStorage.setItem(`favorites-${currentUser}`, JSON.stringify(userFavorites));
-                        alert('You added the product to your favorites!');
-                    } else {
-                        alert('This product is already in your favorites.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching product information:', error);
-                });
-        } else {
-            alert('You must be logged in to add products to your favorites.');
-        }
-    });
-    
+addCartEventListeners(addToCartForm);
+addFavoriteEventListeners(addToFavorites);
 
 
 

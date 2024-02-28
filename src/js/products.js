@@ -110,6 +110,13 @@ function createTableView(products) {
 
     products.forEach(product => {
 
+        let productLikes = 0;
+
+        if(localStorage.getItem('likedItems')) {
+            let likedItems = JSON.parse(localStorage.getItem('likedItems'));
+            productLikes = likedItems[product.id] || 0;
+        }
+
         let productRow = document.createElement('tr');
 
         productRow.classList.add('border', 'border-gray-200');
@@ -118,6 +125,13 @@ function createTableView(products) {
             <td><img src="${product.image}" alt="${product.title}" class="w-20 h-20"></td>
             <td class="p-4 text-center">${product.price}€</td>
             <td><a href="#" id="see-${product.id}" class="cursor-pointer bg-blue-500 text-white p-2 m-5 rounded">See more</a></td>
+            <td>
+                <form id="add-to-cart-${product.id}" class="flex flex-col">
+                    <input type="number" name="units" id="units" min="1" value="1" class="bg-gray-100 mb-3 px-3 py-2 rounded">
+                    <input type="submit" value="Add to cart" class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer h-fit">
+                </form>
+                <button id="add-to-favorites-${product.id}" class="bg-red-500 text-white p-2 m-5 rounded cursor-pointer">Add to favorites</button>
+            </td>
         `;
 
         let seeProduct = productRow.querySelector(`#see-${product.id}`);
@@ -126,6 +140,11 @@ function createTableView(products) {
             redirectToProductPage(product.id);
         });
 
+        let addToCartForm = productRow.querySelector(`#add-to-cart-${product.id}`);
+        addCartEventListeners(addToCartForm, product.id);
+
+        let addToFavorites = productRow.querySelector(`#add-to-favorites-${product.id}`);
+        addFavoriteEventListeners(addToFavorites, product.id);
     
 
         productRow.addEventListener('mouseover', () => {
