@@ -62,9 +62,6 @@ loginRegister.addEventListener('click', (event) => {
 });
 
 
-
-
-
 function disableNextInput(nextInput) {
     if (!nextInput.hasAttribute('disabled')) {
         nextInput.setAttribute('disabled', 'disabled');
@@ -107,9 +104,6 @@ document.querySelector("#register [name='age']").addEventListener('input', () =>
 document.querySelector("#register [name='password']").addEventListener('input', () => validateNextField('password', 'submit'));
 
 
-
-
-
 function login(username, password) {
     let user = JSON.parse(localStorage.getItem(username));
     if (user) {
@@ -143,34 +137,3 @@ function login(username, password) {
             });
     }
 }
-
-/* NO FUNCIONA
-import { createTransport } from 'nodemailer';
-
-async function sendRegisterMail(userEmail, userName) {
-    let transporter = createTransport({
-        service: 'gmail',
-        auth: {
-            type: 'OAuth2',
-            user: process.env.MAIL_USERNAME,
-            pass: process.env.MAIL_PASSWORD,
-            clientId: process.env.OAUTH_CLIENTID,
-            clientSecret: process.env.OAUTH_CLIENT_SECRET,
-            refreshToken: process.env.OAUTH_REFRESH_TOKEN
-        }
-    });
-
-    let mailOptions = {
-        from: 'tu-correo@gmail.com',
-        to: userEmail,
-        subject: 'Bienvenido a nuestra web',
-        text: `Hola ${userName}, gracias por registrarte en nuestra web!`
-    };
-
-    try {
-        let info = await transporter.sendMail(mailOptions);
-        console.log('Email enviado: ' + info.response);
-    } catch (error) {
-        console.log(error);
-    }
-}*/
