@@ -1,5 +1,4 @@
 //URL FAKESTORE API
-
 const usersURL = 'https://fakestoreapi.com/users';
 const productsURL = 'https://fakestoreapi.com/products';
 const productosRuta = "../html/products.html"; //como importarla de otro archivo?
@@ -41,7 +40,7 @@ loginRegister.addEventListener('click', (event) => {
                     password: password
                 };
                 //he añadido un username para poder controlar que no se repitan los usuarios 
-                //(habia pensado en usar el dni, que es unico, pero para el login es mas comodo usar el username)
+                //(habia pensado en usar el dni o email, que es unico, pero para el login es mas comodo usar el username)
                 localStorage.setItem(username, JSON.stringify(user));
                 document.getElementById('register-form').reset();
                 document.getElementById('register').style.display = 'none';
@@ -128,14 +127,12 @@ function login(username, password) {
                 let user = data.find(user => user.username === username);
                 if (user) {
                     if (user.password === password) {
-                        // Almacena el usuario localmente antes de redirigir
-                        localStorage.setItem(username, JSON.stringify(user));
-
-                        
+                        //yo he decidido guardar los usuarios de la api en el localStorage, pero no es necesario
+                        localStorage.setItem(username, JSON.stringify(user)); 
+                        localStorage.setItem('currentUsername', username);
 
                         alert('Login successful');
                         window.location.replace(productosRuta);
-
                         
                     } else {
                         alert('The password is incorrect. Please try again.');
