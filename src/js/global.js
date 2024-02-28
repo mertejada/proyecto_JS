@@ -90,7 +90,23 @@ function addCartEventListeners(cartItem,productId) {
                             });
                         }
                         localStorage.setItem(`cart-${currentUser}`, JSON.stringify(userCart));
+
+                        
+
                         alert('You added the product to the cart!');
+
+                        let cartLink = document.getElementById('cart-link');
+
+
+                        cartLink.classList.add('animate-pulse');
+                        
+
+
+                        setTimeout(() => {
+                            cartLink.classList.remove('animate-pulse');
+                        }
+                        , 4000);
+
                         
                     })
                     .catch(error => {
@@ -128,6 +144,7 @@ function addFavoriteEventListeners(favoriteItem,productId) {
                         });
 
                         localStorage.setItem(`favorites-${currentUser}`, JSON.stringify(userFavorites));
+
                         alert('You added the product to your favorites!');
                     } else {
                         alert('This product is already in your favorites.');

@@ -71,7 +71,7 @@ function createListView(products) {
 
         
         const productItem = document.createElement('li');
-        productItem.classList.add('border', 'border-gray-200', 'p-4', 'flex', 'justify-between', 'items-center');
+        productItem.classList.add('border', 'border-gray-200', 'p-4', 'flex', 'justify-between', 'items-center','bg-white');
         productItem.innerHTML = `
             <h2>${product.title}</h2>
             <img src="${product.image}" alt="${product.title}" class="w-20 h-20">
@@ -101,15 +101,8 @@ function createListView(products) {
         let addToFavorites = productItem.querySelector(`#add-to-favorites-${product.id}`);
         addFavoriteEventListeners(addToFavorites, product.id);
     
-
+        productItem.classList.add('transition' ,'duration-300' ,'ease-in-out','transform', 'hover:scale-105', 'hover:bg-gray-100');
         
-        productItem.addEventListener('mouseover', () => {
-            productItem.classList.add('bg-gray-100');
-        });
-
-        productItem.addEventListener('mouseout', () => {
-            productItem.classList.remove('bg-gray-100');
-        });
     });
 
     productList.style.display = 'block';
@@ -161,15 +154,8 @@ function createTableView(products) {
         let addToFavorites = productRow.querySelector(`#add-to-favorites-${product.id}`);
         addFavoriteEventListeners(addToFavorites, product.id);
     
-
-        productRow.addEventListener('mouseover', () => {
-            productRow.classList.add('bg-gray-100');
-        });
-
-        productRow.addEventListener('mouseout', () => {
-            productRow.classList.remove('bg-gray-100');
-        });
-
+        productRow.classList.add('transition' ,'duration-300' ,'ease-in-out','transform', 'hover:scale-105', 'hover:bg-gray-100');
+        
         tbody.appendChild(productRow);
     });
 
