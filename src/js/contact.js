@@ -9,7 +9,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let marker = L.marker([37.1922201, -3.6169587]).addTo(mymap)
     .bindPopup("<b>We're here!</b><br/>IES Francisco Ayala. Granada, Spain").openPopup();
 
-let error = document.getElementById('error-message');
 
 function validateInput(input) {
     let inputName = input.name;
@@ -40,10 +39,7 @@ contactForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     if (name.validity.valid && email.validity.valid && message.validity.valid) {
-        error.style.display = 'none';
         contactForm.reset();
         alert('Congratulations! You successfully sent your message!');
-    }else{
-        error.style.display = 'block';
     }
 });

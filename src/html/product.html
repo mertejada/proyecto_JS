@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="../js/product.js" defer></script>
+    <script src="../js/global.js" defer></script>
     <link rel="stylesheet" href="../styles/salida.css">
 
 
@@ -13,12 +14,14 @@
     <header class=" p-4 flex justify-between shadow-md">
         <div >
             <a href="products.html" class="bg-blue-600 text-white p-2 rounded-md m-2">Productos</a>
+            <span id="category-links"></span> 
         </div>
         <div >
             <a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Carrito</a>
-            <a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favoritos</a>
+            <a href = "favorites.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favoritos</a>
+            <a href = "contact.html" class="bg-slate-400 text-white p-2 rounded-md m-2">Contacto</a>
 
-            <a href = "../index.html" class="text-gray-400 m-2" >Cerrar sesión</a>
+            <a href = "../index.html" class="text-gray-400 m-2"id="close-session" >Cerrar sesión</a>
         </div>
         
 
@@ -26,10 +29,15 @@
     <section id="product-info">
 
     </section>
-    <form id="add-to-cart" class="p-10 flex justify-center align-top">
-        <input type="number" name="units" id="units" min="1" value="1" class=" bg-slate-100 mb-10">
-        <input type="submit" value="Add to cart" class="bg-blue-500 text-white p-2 m-5 rounded cursor-pointer">
-    </form>
+    <div class="flex justify-center items-start border border-gray-200 rounded-xl">
+        <form id="add-to-cart" class="p-10 flex">
+            <input type="number" name="units" id="units" min="1" value="1" class="bg-gray-100 mb-3 px-3 py-2 rounded">
+            <input type="submit" value="Add to cart" class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer h-fit">
+        </form>
+    
+        <button id="add-to-favorites" class="bg-gray-400 text-white px-4 py-2 rounded cursor-pointer ml-5 self-start mt-10">Add to favorites</button>
+    </div>
+    
     
 </body>
 </html>

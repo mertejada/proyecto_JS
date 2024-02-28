@@ -7,28 +7,31 @@
     <script src="../js/global.js" defer></script>
     <script src="../js/cart.js" defer></script>
 
+    <script src="https://kit.fontawesome.com/1ffe30f321.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../styles/salida.css">
 
 
 </head>
 <body>
     <header class=" p-4 flex justify-between shadow-md">
-        <div >
+        <div>
             <a href="products.html" class="bg-blue-600 text-white p-2 rounded-md m-2">Productos</a>
+            <span id="category-links"></span> 
         </div>
         <div >
             <a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Carrito</a>
-            <a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favoritos</a>
+            <a href = "favorites.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favoritos</a>
+            <a href = "contact.html" class="bg-slate-400 text-white p-2 rounded-md m-2">Contacto</a>
 
-            <a href = "../index.html" class="text-gray-400 m-2" >Cerrar sesión</a>
+            <a href = "../index.html" class="text-gray-400 m-2"  id="close-session">Cerrar sesión</a>
         </div>
         
 
     </header>
-    <section id="cart">
-        <h1>Carrito</h1>
-        <table id="cart-table">
-            <thead>
+    <section id="cart" class="p-10">
+        <h1 class="text-2xl font-bold mb-5">Carrito</h1>
+        <table id="cart-table"  class="w-full text-left"> 
+            <thead class="bg-gray-200">
                 <tr>
                     <th>Product</th>
                     <th>Price</th>
@@ -42,8 +45,8 @@
             </tbody>
 
         </table>
-        <p>Total: <span id="total-price">0€</span></p>
-        <button id="process-button">Process order</button>
+        <p class="mt-5">Total: <span id="total-price" class="text-black font-bold">0</span></p>
+        <button id="process-button" class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer mt-5">Process order</button>
     </section>
 
     <section id="order-confirmation" style="display:none">

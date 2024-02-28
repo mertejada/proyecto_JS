@@ -5,30 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda de ropa</title>
     <script src="../js/products.js" defer></script>
+    <script src="../js/global.js" defer></script>
     <link rel="stylesheet" href="../styles/salida.css">
-
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
-
-
-
+    
+<!-- choose one -->
+<script src="https://unpkg.com/feather-icons"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace();
+  </script>
 </head>
 <body>
     <header class=" p-4 flex justify-between shadow-md">
         <div >
+            <i data-feather="circle"></i>
+
             <a href="products.html" class="bg-blue-600 text-white p-2 rounded-md m-2">Productos</a>
+            <span id="category-links"></span> 
         </div>
         <div >
+            
             <a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Carrito</a>
-            <a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favoritos</a>
+            <a href = "favorites.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favoritos</a>
             <a href = "contact.html" class="bg-slate-400 text-white p-2 rounded-md m-2">Contacto</a>
 
-            <a href = "../index.html" class="text-gray-400 m-2" >Cerrar sesión</a>
+            <a href = "../index.html" class="text-gray-400 m-2" id="close-session">Cerrar sesión</a>
         </div>
         
 
     </header>
 
-    <h1 class="m-10 text-3xl font-semibold mb-6 text-center">¡Bienvenido!</h1>
+    <h1 class="m-10 text-3xl font-semibold mb-6 text-center">Welcome!</h1>
+    <h2 class=" text-2xl font-semibold mb-6 text-center text-gray-300">Take a look at our products</h2>
     <section id="products">
         <div id="choose-view" class="p-5 text-gray-500"> <p>Choose view:
             <button id="list" class=" bg-slate-100  text-gray-500 p-1 rounded-md border">List</button>
@@ -37,7 +45,7 @@
         </div>
 
         <div id="sortby-category" class="p-5 text-gray-500">
-            <p>Sort by category:
+            <p>Sort by:
                 <select id="category" class=" bg-slate-100 text-gray-500 p-1 rounded-md border">
                     <option value="asc" class="">Ascendent</option>
                     <option value="desc">Descendent</option>
@@ -56,7 +64,6 @@
                     <th>Image</th>
                     <th>Price</th>
                     <th></th>
-
                 </tr>
             </thead>
             <tbody>

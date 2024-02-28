@@ -47,9 +47,10 @@ loginRegister.addEventListener('click', (event) => {
                 document.getElementById('register').style.display = 'none';
                 document.getElementById('login').style.display = 'block';
 
-                sendRegisterMail(email, name);
-
                 alert('You have signed up successfully!');
+
+                location.reload();
+
             }
             break;
         case 'login-submit':
@@ -129,8 +130,13 @@ function login(username, password) {
                     if (user.password === password) {
                         // Almacena el usuario localmente antes de redirigir
                         localStorage.setItem(username, JSON.stringify(user));
+
+                        
+
                         alert('Login successful');
                         window.location.replace(productosRuta);
+
+                        
                     } else {
                         alert('The password is incorrect. Please try again.');
                     }
@@ -141,7 +147,7 @@ function login(username, password) {
     }
 }
 
-/*
+/* NO FUNCIONA
 import { createTransport } from 'nodemailer';
 
 async function sendRegisterMail(userEmail, userName) {

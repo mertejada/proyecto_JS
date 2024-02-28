@@ -1,6 +1,7 @@
 const productsURL = 'https://fakestoreapi.com/products';
 const productsSortDescURL = 'https://fakestoreapi.com/products?sort=desc'; 
 const productsSortAscURL = 'https://fakestoreapi.com/products?sort=asc';
+const categoryURL = 'https://fakestoreapi.com/products/category/';
 
 const productList = document.getElementById('product-list');
 const productTable = document.getElementById('product-table');
@@ -22,7 +23,30 @@ categorySelect.addEventListener('change', function() {
 
 });
 
+let category;
+let urlParams = new URLSearchParams(window.location.search);
+
+
 function getProducts(page,sortBy) {
+    if (!localStorage.getItem('likedItems')) {
+        //va a ser un objeto con dos valores: el id del producto y el numero de likes
+        localStorage.setItem('likedItems', JSON.stringify({}));
+
+    }
+
+
+    if (urlParams.has('cat')) {
+        category = urlParams.get('cat');
+
+        document.getElementById('sortby-category').style.display = 'none';
+
+        return fetch(`${categoryURL}${category}`)
+        .then(response => response.json())
+        .then(products => products);
+    }
+    
+
+
     let url = productsURL;
 
     if (sortBy === 'asc') {
@@ -30,7 +54,7 @@ function getProducts(page,sortBy) {
     } else if (sortBy === 'desc') {
         url = productsSortDescURL;
     }
-
+    
     return fetch(`${url}&limit=${productsPerPage}&page=${page}`)
         .then(response => response.json())
         .then(products => products);
@@ -44,6 +68,8 @@ function createListView(products) {
     }
 
     products.forEach(product => {
+
+        
         const productItem = document.createElement('li');
         productItem.classList.add('border', 'border-gray-200', 'p-4', 'flex', 'justify-between', 'items-center');
         productItem.innerHTML = `
@@ -51,6 +77,7 @@ function createListView(products) {
             <img src="${product.image}" alt="${product.title}" class="w-20 h-20">
             <p>${product.price}€</p>
             <a href="#" id="see-${product.id}" class="bg-blue-500 text-white p-2 m-5 rounded cursor-pointer">See more</a>
+
         `;
         let seeProduct = productItem.querySelector(`#see-${product.id}`);
         seeProduct.addEventListener('click', (event) => {
@@ -58,6 +85,8 @@ function createListView(products) {
             redirectToProductPage(product.id);
         });
         productList.appendChild(productItem);
+
+        
         
         productItem.addEventListener('mouseover', () => {
             productItem.classList.add('bg-gray-100');
@@ -77,6 +106,7 @@ function createTableView(products) {
     tbody.innerHTML = '';
 
     products.forEach(product => {
+
         let productRow = document.createElement('tr');
 
         productRow.classList.add('border', 'border-gray-200');

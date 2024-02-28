@@ -15,10 +15,10 @@ cart.forEach(product => {
         <td>${product.price}€</td>
         <td>${product.units}</td>
         <td>${product.price * product.units}€</td>
-        <td><button class="remove-product" data-id="${product.id}">Remove</button></td>
+        <td><button class="remove-product bg-red-500 text-white p-1 rounded" data-id="${product.id}">Remove</button></td>
         <td><form id="change-units"> 
-            <input type="number" name="units" id="units" value="${product.units}" min="1">
-            <input type="submit" value="Change">
+            <input type="number" name="units" id="units" value="${product.units}" min="1" class="p-1 rounded border border-gray-300">
+        <input type="submit" value="Change" class="bg-gray-500 text-white p-1 rounded cursor-pointer">
         </form></td>
     `;
     cartTable.appendChild(row);
