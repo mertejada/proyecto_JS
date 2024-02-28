@@ -103,7 +103,10 @@ function createListView(products) {
 
 function createTableView(products) {
     let tbody = document.querySelector('#product-table tbody');
-    tbody.innerHTML = '';
+
+    if (currentPage === 1) {
+        tbody.innerHTML = ''; 
+    } 
 
     products.forEach(product => {
 
