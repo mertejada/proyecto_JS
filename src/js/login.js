@@ -76,11 +76,10 @@ function validateNextField(inputName, nextInputName) {
     let nextInput = document.querySelector(`#register [name='${nextInputName}']`);
 
 
-    //ten en cuenta el tipo de validacion que se esta haciendo
     if (input.validity.typeMismatch) {
         input.setCustomValidity(`${inputName} not valid`);
         input.reportValidity();
-        //si el campo siguiente esta habilitado, deshabilitarlo
+
         disableNextInput(nextInput);
     } else if (input.validity.patternMismatch) {
         input.setCustomValidity(`${inputName} not valid`);

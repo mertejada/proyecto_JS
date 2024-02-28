@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto</title>
+    <script src="../js/global.js" defer></script>
+    <script src="../js/contact.js" defer></script>s
+
+    <link rel="stylesheet" href="../styles/salida.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"> </script>
+
+</head>
+<body>
+    <header class=" p-4 flex justify-between shadow-md">
+        <div class="flex items-center"> 
+            <a href="products.html" class="bg-blue-600 text-white p-2 rounded-md m-2">Productos</a>
+            <span class="categories-link"></span> 
+          </div>
+        <div >
+          <a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Carrito</a>
+          <a href = "contact.html" class="bg-slate-400 text-white p-2 rounded-md m-2">Contacto</a>
+          <a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favoritos</a>
+          <a href = "../index.html" class="text-gray-400 m-2" id="close-session" >Cerrar sesión</a>
+        </div>
+      </header>
+      
+   
+    <section id="contact" class="container mx-auto py-12"> 
+        <h1 class="text-4xl font-bold text-center mb-8">Contacto</h1>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8"> 
+          <form id="contact-form" class="bg-white shadow-md rounded-lg p-8">
+            <h2 class="text-2xl font-semibold mb-4">Envíanos un mensaje</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4"> 
+              <div> 
+                <label for="name" class="block font-medium mb-2">Nombre:</label>
+                <input type="text" id="name" name="name" class="w-full border-2 border-gray-200 p-2 rounded focus:outline-none" pattern="[a-zA-Záéíóúñü ]+" required>
+              </div>
+              <div> 
+                <label for="email" class="block font-medium mb-2">Email:</label>
+                <input type="email" id="email" name="email" class="w-full border-2 border-gray-200 p-2 rounded focus:outline-none" required>
+              </div>
+            </div> 
+            <div class="mt-4"> 
+              <label for="message" class="block font-medium mb-2">Mensaje:</label>
+              <textarea id="message" name="message" class="w-full border-2 border-gray-200 p-2 rounded h-32 focus:outline-none" required></textarea>
+            </div>
+            <button id="submit-contact"type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md mt-4 hover:bg-blue-700">Enviar</button> 
+          </form>    
+    
+          
+          <div id="map" class="h-64 rounded-lg overflow-hidden"></div> 
+        </div>  
+      </section>
+
+      <p id="error-message" class="text-center text-red-500" style="display: none;">We're sorry. You haven't correctly filled up the form. Please, try again.</p>
+    
+</body>
+</html>
