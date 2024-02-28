@@ -76,7 +76,7 @@ function createListView(products) {
             <h2>${product.title}</h2>
             <img src="${product.image}" alt="${product.title}" class="w-20 h-20">
             <p>${product.price}€</p>
-            <a href="#" id="see-${product.id}" class="bg-blue-500 text-white p-2 m-5 rounded cursor-pointer">See more</a>
+            <a href="#" id="see-${product.id}" class="bg-orange-500 text-white p-2 m-5 rounded cursor-pointer">See more</a>
             <div>
                 <form id="add-to-cart-${product.id}" class="flex flex-col border rounded-md p-4">
                     <input type="number" name="units" id="units" min="1" value="1" class="bg-gray-100 mb-3 px-3 py-2 rounded w-24">
@@ -139,7 +139,7 @@ function createTableView(products) {
             <td class="p-4">${product.title}</td>
             <td><img src="${product.image}" alt="${product.title}" class="w-20 h-20"></td>
             <td class="p-4 text-center">${product.price}€</td>
-            <td><a href="#" id="see-${product.id}" class="cursor-pointer bg-blue-500 text-white p-2 m-5 rounded">See more</a></td>
+            <td><a href="#" id="see-${product.id}" class="cursor-pointer bg-orange-500 text-white p-2 m-5 rounded">See more</a></td>
             <td>
             <form id="add-to-cart-${product.id}" class="flex flex-col border rounded-md p-4">
                     <input type="number" name="units" id="units" min="1" value="1" class="bg-gray-100 mb-3 px-3 py-2 rounded w-24">

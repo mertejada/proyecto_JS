@@ -68,7 +68,7 @@ function addCartEventListeners(cartItem,productId) {
             if (currentUser) {   
                 let units = parseInt(event.target.units.value);
         
-                if (units < 1) {
+                if (units < 1) { //lo hago aqui aunque ya lo hago en el html
                     alert('You need to add at least 1 unit of the product to the cart.');
                     return;
                 }
