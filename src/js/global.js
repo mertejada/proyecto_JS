@@ -33,11 +33,8 @@ fetch(urlCategories)
         });
     });
 
-
-function redirectToProductPage(productId) {
-    window.location.href = `product.html?id=${productId}`;
-}
-
+//DAR LIKE A LOS PRODUCTOS
+//-------------------------
 function like(productId) {
 
     let likedItems = JSON.parse(localStorage.getItem('likedItems'));
@@ -60,8 +57,8 @@ function updateLikesCount(productId, likesCount) {
     }
 }
 
-
-
+//FUNCION PARA AÑADIR PRODUCTOS AL CARRITO
+//------------------------------------------
 function addCartEventListeners(cartItem,productId) {
         cartItem.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -69,7 +66,7 @@ function addCartEventListeners(cartItem,productId) {
             let currentUser = localStorage.getItem('currentUsername');
         
             if (currentUser) {   
-                let units = parseInt(document.getElementById('units').value);
+                let units = parseInt(event.target.units.value);
         
                 if (units < 1) {
                     alert('You need to add at least 1 unit of the product to the cart.');
@@ -106,40 +103,44 @@ function addCartEventListeners(cartItem,productId) {
 
     }
 
-    function addFavoriteEventListeners(favoriteItem,productId) {
-        favoriteItem.addEventListener('click', (event) => {
-            event.preventDefault();
+
+//FUNCION PARA AÑADIR PRODUCTOS A FAVORITOS
+//------------------------------------------
+function addFavoriteEventListeners(favoriteItem,productId) {
+    favoriteItem.addEventListener('click', (event) => {
+        event.preventDefault();
     
-            let currentUser = localStorage.getItem('currentUsername');
+        let currentUser = localStorage.getItem('currentUsername');
     
-            if (currentUser) {
-                getProductInfo(productId)
-                    .then(product => {
-                        let userFavorites = JSON.parse(localStorage.getItem(`favorites-${currentUser}`)) || [];
+        if (currentUser) {
+            getProductInfo(productId)
+                .then(product => {
+                    let userFavorites = JSON.parse(localStorage.getItem(`favorites-${currentUser}`)) || [];
     
-                        let existingProduct = userFavorites.find(item => item.id === product.id);
+                    let existingProduct = userFavorites.find(item => item.id === product.id);
     
-                        if (!existingProduct) {
-                            userFavorites.push({
-                                id: product.id,
-                                title: product.title,
-                                price: product.price,
-                                img: product.image
-                            });
-                            localStorage.setItem(`favorites-${currentUser}`, JSON.stringify(userFavorites));
-                            alert('You added the product to your favorites!');
-                        } else {
-                            alert('This product is already in your favorites.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching product information:', error);
-                    });
-            } else {
-                alert('You must be logged in to add products to your favorites.');
-            }
-        });
-    }
+                    if (!existingProduct) {
+                        userFavorites.push({
+                            id: product.id,
+                            title: product.title,
+                            price: product.price,
+                            img: product.image
+                        });
+
+                        localStorage.setItem(`favorites-${currentUser}`, JSON.stringify(userFavorites));
+                        alert('You added the product to your favorites!');
+                    } else {
+                        alert('This product is already in your favorites.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching product information:', error);
+                });
+        } else {
+            alert('You must be logged in to add products to your favorites.');
+        }
+    });
+}
 
 
 
