@@ -13,18 +13,24 @@
 
 </head>
 <body>
-    <header class=" p-4 flex justify-between shadow-md">
-        <div class="flex items-center"> 
-            <a href="products.html" class="bg-blue-600 text-white p-2 rounded-md m-2">Products</a>
-            <span id="category-links"></span> 
-          </div>
-        <div >
-          <a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Cart</a>
-          <a href = "favorites.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favorites</a>
-          <a href = "contact.html" class="bg-slate-400 text-white p-2 rounded-md m-2">Contact</a>
-          <a href = "../index.html" class="text-gray-400 m-2" id="close-session" >Log out</a>
-        </div>
-      </header>
+  <header class=" p-4 flex justify-between shadow-md">
+    <div class="flex items-center">
+        <i data-feather="circle"></i>
+
+        <a href="products.html" class="bg-blue-600 text-white p-2 rounded-md m-2">Products</a>
+        <span id="category-links"></span> 
+    </div>
+    <div  class="flex justify-between items-center">
+        
+        <a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2" id="cart-link">Cart</a>
+        <a href = "favorites.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favorites</a>
+        <a href = "contact.html" class="bg-slate-400 text-white p-2 rounded-md m-2">Contact</a>
+        <a href = "../index.html" class="text-gray-400 m-2" id="close-session">Log out</a>
+        <a href = "../index.html" class="bg-green-600 text-white p-2 rounded-md m-2" id="log-in" style="display: none;">Log in</a>
+    </div>
+    
+
+  </header>
       
    
     <section id="contact" class="container mx-auto py-12"> 

@@ -1,12 +1,20 @@
 
 //CERRAR SESION
 //-------------
-let element = document.getElementById('close-session');
+let close = document.getElementById('close-session');
 
-element.addEventListener('click', () => {
+if(localStorage.getItem('currentUsername')){
+
+    close.addEventListener('click', () => {
     localStorage.removeItem('currentUsername');
     window.location.href = 'index.html';
-});
+
+});}else{
+    close.style.display = 'none';
+
+    let logIn = document.getElementById('log-in');
+    logIn.style.display = 'block';
+}
 
 //CONSEGUIR LA INFORMACION EN CONCRETO DE UN PRODUCTO
 //---------------------------------------------------
