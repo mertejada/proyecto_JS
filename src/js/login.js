@@ -1,7 +1,7 @@
 //URL FAKESTORE API
 const usersURL = 'https://fakestoreapi.com/users';
 const productsURL = 'https://fakestoreapi.com/products';
-const productosRuta = "../src/html/products.html";
+const productosRuta = "../../src/html/products.html";
 let currentUsername = localStorage.getItem('currentUsername');
 
 
