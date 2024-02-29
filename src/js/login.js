@@ -73,25 +73,32 @@ function validateNextField(inputName, nextInputName) {
     let nextInput = document.querySelector(`#register [name='${nextInputName}']`);
 
 
-    if (input.validity.typeMismatch) {
+    if (input.validity.typeMismatch) { //si el tipo de dato no es el correcto
+        input.setCustomValidity(`${inputName} not valid`);
+        input.reportValidity();
+
+        disableNextInput(nextInput); 
+    } else if (input.validity.patternMismatch) { //si no cumple el patron
         input.setCustomValidity(`${inputName} not valid`);
         input.reportValidity();
 
         disableNextInput(nextInput);
-    } else if (input.validity.patternMismatch) {
+    } else if (input.validity.rangeUnderflow) { //si el valor es menor que el minimo (edad)
         input.setCustomValidity(`${inputName} not valid`);
         input.reportValidity();
 
         disableNextInput(nextInput);
-    } else if (input.validity.rangeUnderflow) {
-        input.setCustomValidity(`${inputName} not valid`);
+    } else if (input.validity.valueMissing) { //si el campo esta vacio
+        input.setCustomValidity(`${inputName} is required`);
         input.reportValidity();
 
         disableNextInput(nextInput);
-    } else {
+    }else{
         input.setCustomValidity('');
         nextInput.removeAttribute('disabled');
     }
+
+
 
 }
 

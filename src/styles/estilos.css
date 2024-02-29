@@ -29,3 +29,8 @@
 .ping{
     animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
+
+input:disabled {
+  background-color: #f4f4f4;
+  color: #ccc;
+}
