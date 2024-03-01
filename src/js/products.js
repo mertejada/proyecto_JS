@@ -28,11 +28,6 @@ let urlParams = new URLSearchParams(window.location.search);
 
 
 function getProducts(page,sortBy) {
-    if (!localStorage.getItem('likedItems')) {
-        //va a ser un objeto con dos valores: el id del producto y el numero de likes
-        localStorage.setItem('likedItems', JSON.stringify({}));
-
-    }
 
 
     if (urlParams.has('cat')) {

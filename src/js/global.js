@@ -45,6 +45,12 @@ fetch(urlCategories)
 //-------------------------
 function like(productId) {
 
+
+    if (!localStorage.getItem('likedItems')) {
+        localStorage.setItem('likedItems', JSON.stringify({}));
+    }
+
+
     let likedItems = JSON.parse(localStorage.getItem('likedItems'));
 
     if (likedItems[productId]) {
@@ -61,9 +67,42 @@ function like(productId) {
 function updateLikesCount(productId, likesCount) {
     let productLikes = document.getElementById(`likes-${productId}`);
     if (productLikes) {
-        productLikes.innerHTML = likesCount +" likes";
+        productLikes.innerHTML = likesCount;
     }
 }
+
+//DAR DISLIKE A LOS PRODUCTOS
+//-------------------------
+
+
+
+
+function dislike(productId) {
+    if (!localStorage.getItem('dislikedItems')) {
+        //va a ser un objeto con dos valores: el id del producto y el numero de dislikes
+        localStorage.setItem('dislikedItems', JSON.stringify({}));
+    }
+
+    let dislikedItems = JSON.parse(localStorage.getItem('dislikedItems'));
+
+    if (dislikedItems[productId]) {
+        dislikedItems[productId]++;
+    } else {
+        dislikedItems[productId] = 1;
+    }
+
+    localStorage.setItem('dislikedItems', JSON.stringify(dislikedItems));
+
+    updateDislikesCount(productId, dislikedItems[productId]);
+}
+
+function updateDislikesCount(productId, dislikesCount) {
+    let productDislikes = document.getElementById(`dislikes-${productId}`);
+    if (productDislikes) {
+        productDislikes.innerHTML = dislikesCount;
+    }
+}
+
 
 //FUNCION PARA AÑADIR PRODUCTOS AL CARRITO
 //------------------------------------------
