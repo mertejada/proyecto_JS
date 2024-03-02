@@ -4,3 +4,4 @@ desarrollo
 produccion
 *tpm
 .vscode
+.DS_Store
