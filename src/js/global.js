@@ -3,13 +3,13 @@
 //-------------
 let close = document.getElementById('close-session');
 
-if(localStorage.getItem('currentUsername')){
-
+if(localStorage.getItem('currentUsername')){ //si hay un usuario logueado
     close.addEventListener('click', () => {
     localStorage.removeItem('currentUsername');
     window.location.href = 'index.html';
 
-});}else{
+});
+}else{
     close.style.display = 'none';
 
     let logIn = document.getElementById('log-in');
@@ -44,23 +44,24 @@ fetch(urlCategories)
 //DAR LIKE A LOS PRODUCTOS
 //-------------------------
 function like(productId) {
-
-
-    if (!localStorage.getItem('likedItems')) {
-        localStorage.setItem('likedItems', JSON.stringify({}));
+    if (!localStorage.getItem('likedItems')) { 
+        localStorage.setItem('likedItems', JSON.stringify({})); //si no hay productos con me gusta en el localStorage, lo creo
     }
 
+    let likedItems = JSON.parse(localStorage.getItem('likedItems')); 
 
-    let likedItems = JSON.parse(localStorage.getItem('likedItems'));
 
-    if (likedItems[productId]) {
+    //controlo si ya existe el producto en el localStorage
+    if (likedItems[productId]) { 
         likedItems[productId]++;
     } else {
         likedItems[productId] = 1;
     }
 
+    //actualizo el localStorage
     localStorage.setItem('likedItems', JSON.stringify(likedItems));
 
+    //actualizo el contador de me gusta en la vista
     updateLikesCount(productId, likedItems[productId]);
 }
 
@@ -73,10 +74,6 @@ function updateLikesCount(productId, likesCount) {
 
 //DAR DISLIKE A LOS PRODUCTOS
 //-------------------------
-
-
-
-
 function dislike(productId) {
     if (!localStorage.getItem('dislikedItems')) {
         //va a ser un objeto con dos valores: el id del producto y el numero de dislikes
@@ -122,12 +119,12 @@ function addCartEventListeners(cartItem,productId) {
         
                 getProductInfo(productId)
                     .then(product => {
-                        let userCart = JSON.parse(localStorage.getItem(`cart-${currentUser}`)) || [];
+                        let userCart = JSON.parse(localStorage.getItem(`cart-${currentUser}`)) || []; //consigo el carrito del usuario o un array vacio 
     
-                        let existingProduct = userCart.find(item => item.id === product.id);
+                        let existingProduct = userCart.find(item => item.id === product.id); //compruebo si el producto ya esta en el carrito
     
                         if (existingProduct) {
-                            existingProduct.units += units;
+                            existingProduct.units += units; //si ya esta actualizo las unidades
                         }else{
                             userCart.push({
                                 id: product.id,
@@ -136,19 +133,15 @@ function addCartEventListeners(cartItem,productId) {
                                 units: units
                             });
                         }
-                        localStorage.setItem(`cart-${currentUser}`, JSON.stringify(userCart));
 
-                        
+                        localStorage.setItem(`cart-${currentUser}`, JSON.stringify(userCart)); //actualizo el carrito
 
                         alert('You added the product to the cart!');
 
                         let cartLink = document.getElementById('cart-link');
-
-
                         cartLink.classList.add('animate-pulse');
                         
-
-
+                        //animacion
                         setTimeout(() => {
                             cartLink.classList.remove('animate-pulse');
                         }
@@ -163,7 +156,6 @@ function addCartEventListeners(cartItem,productId) {
                 alert('You must be logged in to add products to the cart.');
             }
         });
-
     }
 
 

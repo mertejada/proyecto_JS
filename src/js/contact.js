@@ -34,7 +34,7 @@ name.addEventListener('input', () => validateInput(name));
 email.addEventListener('input', () => validateInput(email));
 message.addEventListener('input', () => validateInput(message));
 
-
+//evento para enviar el formulario
 contactForm.addEventListener('submit', (event) => {
     event.preventDefault();
 

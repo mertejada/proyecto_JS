@@ -1,8 +1,8 @@
 
-let productId = new URLSearchParams(window.location.search).get('id');
+let productId = new URLSearchParams(window.location.search).get('id'); //consigo el id del producto de la url
 
-
-
+//FUNCION PARA MOSTRAR LA INFORMACION DEL PRODUCTO
+//-----------------------------------------------
 function displayProductInfo(product) {
     let productInfo = document.getElementById('product-info');
     let productLikes = 0;
@@ -10,9 +10,9 @@ function displayProductInfo(product) {
     productInfo.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'text-center', 'p-4');
 
 
-    if(localStorage.getItem('likedItems')) {
+    if(localStorage.getItem('likedItems')) { //si hay productos con me gusta en el localStorage
         let likedItems = JSON.parse(localStorage.getItem('likedItems'));
-        productLikes = likedItems[product.id] || 0;
+        productLikes = likedItems[product.id] || 0; //cojo el valor de me gusta del producto o 0
     }
 
     if(localStorage.getItem('dislikedItems')) {
@@ -37,25 +37,23 @@ function displayProductInfo(product) {
 
     let giveLike = document.getElementById(`like-${product.id}`);
 
-    giveLike.addEventListener('click', (event) => {
+    giveLike.addEventListener('click', (event) => { //evento para dar me gusta
         event.preventDefault();
-
         like(product.id);
     });
 
 
     let giveDislike = document.getElementById(`dislike-${product.id}`);
 
-    giveDislike.addEventListener('click', (event) => {
+    giveDislike.addEventListener('click', (event) => { //evento para dar no me gusta
         event.preventDefault();
-
         dislike(product.id);
     });
 }
 
-getProductInfo(productId)
+getProductInfo(productId) //llamo a la funcion que esta en global.js
     .then(product => {
-        displayProductInfo(product);
+        displayProductInfo(product); //muestro la informacion del producto
     })
     .catch(error => {
         console.error('Error fetching product information:', error);
@@ -65,8 +63,8 @@ getProductInfo(productId)
 let addToCartForm = document.getElementById('add-to-cart');
 let addToFavorites = document.getElementById('add-to-favorites');
 
-addCartEventListeners(addToCartForm);
-addFavoriteEventListeners(addToFavorites);
+addCartEventListeners(addToCartForm); //evento para añadir al carrito
+addFavoriteEventListeners(addToFavorites); //evento para añadir a favoritos
 
 
 

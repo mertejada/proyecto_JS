@@ -1,7 +1,6 @@
 let cartTable = document.getElementById('cart-table');
 
 let currentUser = localStorage.getItem('currentUsername');
-
 let cart = JSON.parse(localStorage.getItem(`cart-${currentUser}`)) || [];
 
 let total = 0;
@@ -23,17 +22,23 @@ cart.forEach(product => {
     `;
     cartTable.appendChild(row);
 
+    //evento para eliminar productos del carrito
     let removeButton = row.querySelector('.remove-product');
+
     removeButton.addEventListener('click', (event) => {
         let productId = event.target.getAttribute('data-id'); 
         let productIndex = cart.findIndex(item => item.id === productId); //busca el indice del producto en el carrito
-        cart.splice(productIndex, 1); 
-        localStorage.setItem(`cart-${currentUser}`, JSON.stringify(cart)); 
-        row.remove();
-        total -= product.price * product.units;
+        
+        cart.splice(productIndex, 1); //elimina el producto del carrito 
+        localStorage.setItem(`cart-${currentUser}`, JSON.stringify(cart)); //actualiza el carrito
+
+        //actualizo la vista
+        row.remove(); 
+        total -= product.price * product.units; 
         totalPrice.innerHTML = `${total}€`;
     });
 
+    //evento para cambiar las unidades de un producto
     let changeUnitsForm = row.querySelector('#change-units');
 
     changeUnitsForm.addEventListener('submit', (event) => {
@@ -62,13 +67,16 @@ cart.forEach(product => {
     totalPrice.innerHTML = `${total}€`;
 });
 
-
+//evento para procesar la compra
 let processButton = document.getElementById('process-button');
 
 processButton.addEventListener('click', () => {
     if (total > 0) {
         alert('Your purchase has been processed successfully!');
-        localStorage.removeItem(`cart-${currentUser}`);
+
+        localStorage.removeItem(`cart-${currentUser}`);  //elimina el carrito del localStorage
+
+        //actualiza la vista
         cartTable.innerHTML = '';
         total = 0;
         totalPrice.innerHTML = `${total}€`;

@@ -16,9 +16,9 @@ const categorySelect = document.getElementById('category');
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-categorySelect.addEventListener('change', function() {
-    sortBy = this.value;
-    currentPage = 1;
+categorySelect.addEventListener('change', function() { //evento para cambiar la manera de ordenar los productos
+    sortBy = this.value; //valor del select
+    currentPage = 1; //empiezo desde la primera pagina
     displayView(currentView);
 
 });
@@ -26,44 +26,43 @@ categorySelect.addEventListener('change', function() {
 let category;
 let urlParams = new URLSearchParams(window.location.search);
 
-
+//FUNCION PARA MOSTRAR LOS PRODUCTOS
+//----------------------------------
 function getProducts(page,sortBy) {
-
-
-    if (urlParams.has('cat')) {
+    if (urlParams.has('cat')) { //si la url tiene el parametro cat
         category = urlParams.get('cat');
 
         document.getElementById('sortby-category').style.display = 'none';
 
-        return fetch(`${categoryURL}${category}`)
-        .then(response => response.json())
+        return fetch(`${categoryURL}${category}`) //peticion con la categoria
+        .then(response => response.json()) 
         .then(products => products);
     }
-    
-
 
     let url = productsURL;
 
+    //por si cambia el valor del select
     if (sortBy === 'asc') {
         url = productsSortAscURL;
     } else if (sortBy === 'desc') {
         url = productsSortDescURL;
     }
     
-    return fetch(`${url}&limit=${productsPerPage}&page=${page}`)
+    return fetch(`${url}&limit=${productsPerPage}&page=${page}`) //lo que devuelve la peticion
         .then(response => response.json())
         .then(products => products);
 }
 
+
+//FUNCION PARA MOSTRAR LOS PRODUCTOS EN LISTA
+//------------------------------------------- 
 function createListView(products) {
-    
 
     if (currentPage === 1) {
         productList.innerHTML = ''; // Limpiar lista de productos solo en la primera carga
     }
 
     products.forEach(product => {
-
         
         const productItem = document.createElement('li');
         productItem.classList.add('border', 'border-gray-200', 'p-4', 'flex', 'justify-between', 'items-center','bg-white');
@@ -81,18 +80,21 @@ function createListView(products) {
             </div>
 
 
-        `;//border', 'border-blue-600', 'text-blue-600', 'p-2', 'rounded-md', 'm-2
+        `;
+
+        // Evento para ver más detalles del producto
         let seeProduct = productItem.querySelector(`#see-${product.id}`);
         seeProduct.addEventListener('click', (event) => {
             event.preventDefault();
-            redirectToProductPage(product.id);
+            redirectToProductPage(product.id); //redirige a la pagina del producto
         });
         productList.appendChild(productItem);
 
-        
+        //evento para añadir al carrito
         let addToCartForm = productItem.querySelector(`#add-to-cart-${product.id}`);
         addCartEventListeners(addToCartForm, product.id);
 
+        //evento para añadir a favoritos
         let addToFavorites = productItem.querySelector(`#add-to-favorites-${product.id}`);
         addFavoriteEventListeners(addToFavorites, product.id);
     
@@ -100,10 +102,14 @@ function createListView(products) {
         
     });
 
+    //mostrar la lista de productos y ocultar la tabla
     productList.style.display = 'block';
     productTable.style.display = 'none';
 }
 
+
+//FUNCION PARA MOSTRAR LOS PRODUCTOS EN TABLA
+//-------------------------------------------
 function createTableView(products) {
     let tbody = document.querySelector('#product-table tbody');
 
@@ -154,13 +160,13 @@ function createTableView(products) {
         tbody.appendChild(productRow);
     });
 
+    //mostrar la tabla de productos y ocultar la lista
     document.getElementById('product-table').style.display = 'block';
     document.getElementById('product-list').style.display = 'none';
 }
 
 
-
-
+//Evento para controlar la vista
 document.getElementById('choose-view').addEventListener('click', (event) => {
     if (event.target.id === 'list') {
         currentView = 'list';
@@ -171,6 +177,7 @@ document.getElementById('choose-view').addEventListener('click', (event) => {
     }
 });
 
+//Evento para controlar el scroll infinito
 window.addEventListener('scroll', () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
         currentPage++;
@@ -179,7 +186,8 @@ window.addEventListener('scroll', () => {
 });
 
 
-
+//FUNCION PARA GENERAR LA VISTA
+//-----------------------------
 function displayView(currentView) {
     getProducts(currentPage, sortBy)
     .then(products => {
@@ -197,10 +205,14 @@ function displayView(currentView) {
     });
 }
 
-displayView(currentView);
-
+//FUNCION PARA REDIRIGIR A LA PAGINA DEL PRODUCTO
+//----------------------------------------------
 function redirectToProductPage(productId) {
     window.location.href = `product.html?id=${productId}`;
 }
+
+
+displayView(currentView); //por defecto muestra la vista en lista
+
 
 

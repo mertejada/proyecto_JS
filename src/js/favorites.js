@@ -1,7 +1,6 @@
 let favTable = document.getElementById('favorites-table');
 
 let currentUser = localStorage.getItem('currentUsername');
-
 let favorites = JSON.parse(localStorage.getItem(`favorites-${currentUser}`)) || [];
 
 favorites.forEach(product => {
