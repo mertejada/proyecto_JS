@@ -1,7 +1,6 @@
-PROYECTO JAVASCRIPT
-
-ENLACE AL REPOSITORIO DE GITHUB:
+# Proyecto JavaScript
+## Enlace al repositorio de GitHub:
 https://github.com/mertejada/proyecto_JS
 
-ENLACE AL HOST:
+## Enlace a la web
 https://tejadapmercedes-proyecto-js.000webhostapp.com/
